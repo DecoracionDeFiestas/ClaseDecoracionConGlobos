@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase Gratis de Decoración con Globos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rosa:      #d5006d;
+      --rosa-cl:   #fbeaf0;
+      --oro:       #ffd700;
+      --oro-cl:    #fffbe6;
+      --verde:     #4caf50;
+      --azul-cl:   #bac6f0;
+      --morado:    #7c3aed;
+      --celeste:   #38bdf8;
+      --coral:     #f97316;
+      --blanco:    #ffffff;
+      --gris-cl:   #f7f4f0;
+      --negro:     #111;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--negro);
+      background: var(--blanco);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── GLOBOS FLOTANTES decorativos ── */
+    .globos-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .globo {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.10;
+      animation: flotar linear infinite;
+    }
+    .globo::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 60px;
+      background: currentColor;
+      margin: 0 auto;
+      opacity: .5;
+    }
+    @keyframes flotar {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: .12; }
+      90%  { opacity: .10; }
+      100% { transform: translateY(-20vh) rotate(15deg); opacity: 0; }
+    }
+
+    /* Contenido siempre encima */
+    .page-wrap { position: relative; z-index: 1; }
+
+    /* ── BANNER TOP ── */
+    .banner-top {
+      background: var(--oro);
+      padding: 13px 20px;
+      text-align: center;
+    }
+    .banner-top p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.82rem, 2vw, 1rem);
+      font-weight: 700;
+      color: #3a2800;
+      line-height: 1.4;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #fff9e6 0%, #fce4f0 60%, #e8edff 100%);
+      padding: 50px 30px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 700px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-text { text-align: center; }
+      .hero-text .cta-wrap { text-align: center !important; }
+    }
+    .hero-text { display: flex; flex-direction: column; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--rosa);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      align-self: flex-start;
+    }
+    @media (max-width: 700px) { .hero-badge { align-self: center; } }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: var(--negro);
+    }
+    .hero h1 em { font-style: normal; color: var(--rosa); }
+    .hero .subtitulo {
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      color: #444;
+      line-height: 1.65;
+    }
+    .hero .subtitulo strong { color: var(--rosa); }
+    .hero-globos {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+      letter-spacing: 5px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-7px); }
+    }
+    /* ── VIDEO LAZY ── */
+    .hero-video-wrap {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .video-lazy-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #7c3aed, #38bdf8);
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    }
+    .video-lazy-container .video-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity .3s;
+    }
+    .video-lazy-container iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.5));
+      transition: transform .2s;
+      z-index: 2;
+    }
+    .play-btn:hover { transform: translate(-50%, -50%) scale(1.1); }
+    .video-lazy-container.loaded .video-thumb,
+    .video-lazy-container.loaded .play-btn { display: none; }
+
+    /* ── CTA BUTTON ── */
+    .btn-wa {
+      display: inline-block;
+      background: var(--verde);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      font-weight: 800;
+      padding: 18px 42px;
+      border-radius: 14px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(76,175,80,.38);
+      line-height: 1.3;
+      cursor: pointer;
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(76,175,80,.48); }
+    .btn-wa small {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      opacity: .88;
+      margin-top: 4px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .cta-wrap { text-align: center; padding: 8px 20px; }
+
+    /* ── DOLOR — "Esto es para ti si…" ── */
+    .para-ti {
+      background: var(--gris-cl);
+      padding: 50px 20px;
+    }
+    .para-ti .inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .para-ti h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .check-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .check-item {
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      border-left: 5px solid var(--rosa);
+    }
+    .check-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .check-item p {
+      font-size: 1rem;
+      line-height: 1.55;
+      color: #333;
+    }
+    .check-item p strong { color: var(--rosa); }
+
+    /* ── QUÉ APRENDERÁS ── */
+    .aprenderas {
+      background: var(--azul-cl);
+      padding: 50px 20px;
+    }
+    .aprenderas .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .aprenderas h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .beneficio-card {
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: 0 2px 14px rgba(0,0,0,.08);
+    }
+    .beneficio-card .b-icon { font-size: 2rem; margin-bottom: 10px; }
+    .beneficio-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--rosa);
+    }
+    .beneficio-card p { font-size: 0.92rem; color: #444; line-height: 1.5; }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      padding: 40px 20px;
+      background: var(--blanco);
+    }
+    .quote-box {
+      max-width: 780px;
+      margin: 0 auto;
+      border: 2px solid var(--rosa);
+      border-radius: 14px;
+      padding: 26px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .quote-box::before {
+      content: '❝';
+      font-size: 3rem;
+      color: var(--rosa);
+      opacity: .25;
+      position: absolute;
+      top: -10px; left: 16px;
+      line-height: 1;
+    }
+    .quote-box p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--rosa);
+      font-style: italic;
+      line-height: 1.65;
+    }
+    .quote-box p strong { color: var(--negro); font-style: normal; }
+
+    /* ── MONETIZA ── */
+    .monetiza {
+      background: linear-gradient(135deg, #fff9e6 0%, #fce4f0 100%);
+      padding: 50px 20px;
+    }
+    .monetiza .inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .monetiza h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+    }
+    .monetiza p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #444;
+      max-width: 640px;
+      margin: 0 auto 24px;
+    }
+    .monetiza p strong { color: var(--rosa); }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .tag {
+      background: var(--rosa);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 999px;
+    }
+
+    /* ── INSTRUCTOR ── */
+    .instructor {
+      background: var(--blanco);
+      padding: 50px 20px;
+    }
+    .instructor .inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .instructor h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      text-align: center;
+      margin-bottom: 32px;
+      font-weight: 900;
+    }
+    .instructor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 36px;
+      align-items: center;
+    }
+    @media (max-width: 640px) { .instructor-grid { grid-template-columns: 1fr; } }
+
+    .instructor-img-wrap {
+      position: relative;
+      text-align: center;
+    }
+    .instructor-img-wrap img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 16px;
+      box-shadow: 0 6px 28px rgba(0,0,0,.14);
+    }
+    .instructor-bio p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #333;
+    }
+    .instructor-bio p + p { margin-top: 14px; }
+
+    /* avatar placeholder cuando no hay foto */
+    .avatar-placeholder {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rosa-cl), var(--azul-cl));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(213,0,109,.15);
+    }
+
+    /* ── URGENCIA ── */
+    .urgencia {
+      background: var(--rosa);
+      padding: 46px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .urgencia::before {
+      content: '🎈🎈🎈🎈🎈🎈🎈🎈';
+      font-size: 1.8rem;
+      position: absolute;
+      top: 8px; left: 0; right: 0;
+      text-align: center;
+      opacity: .3;
+      pointer-events: none;
+    }
+    .urgencia h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #fff;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+    .urgencia p {
+      color: rgba(255,255,255,.9);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-wa-blanco {
+      display: inline-block;
+      background: #fff;
+      color: var(--verde);
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 800;
+      padding: 18px 44px;
+      border-radius: 14px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+      line-height: 1.3;
+    }
+    .btn-wa-blanco:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
+    .btn-wa-blanco small {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      margin-top: 4px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--azul-cl);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    footer h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    footer p { font-size: 0.9rem; color: #333; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 4px;
+      background: linear-gradient(90deg, var(--oro), var(--rosa), var(--morado), var(--celeste), var(--oro));
+      opacity: .7;
+    }
+
+    /* ── GRATIS BADGE ── */
+    .gratis-badge {
+      display: inline-block;
+      background: var(--oro);
+      color: #3a2800;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 8px 24px;
+      border-radius: 999px;
+      letter-spacing: .04em;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(255,215,0,.4);
+    }
+
+    /* ── ANIMACIONES ENTRADA ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1        { animation: fadeUp .6s ease both; }
+    .hero .subtitulo{ animation: fadeUp .6s .12s ease both; }
+    .hero-badge     { animation: fadeUp .5s .05s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .check-list { grid-template-columns: 1fr; }
+      .beneficios-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .beneficios-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Globos flotantes de fondo -->
+<div class="globos-bg" aria-hidden="true">
+  <div class="globo" style="width:60px;height:70px;background:#d5006d;left:8%;animation-duration:18s;animation-delay:0s;"></div>
+  <div class="globo" style="width:45px;height:55px;background:#ffd700;left:22%;animation-duration:22s;animation-delay:4s;"></div>
+  <div class="globo" style="width:70px;height:82px;background:#7c3aed;left:40%;animation-duration:16s;animation-delay:2s;"></div>
+  <div class="globo" style="width:50px;height:60px;background:#38bdf8;left:58%;animation-duration:24s;animation-delay:7s;"></div>
+  <div class="globo" style="width:55px;height:65px;background:#f97316;left:75%;animation-duration:19s;animation-delay:1s;"></div>
+  <div class="globo" style="width:40px;height:48px;background:#4caf50;left:88%;animation-duration:21s;animation-delay:9s;"></div>
+  <div class="globo" style="width:65px;height:76px;background:#d5006d;left:33%;animation-duration:17s;animation-delay:12s;"></div>
+  <div class="globo" style="width:48px;height:57px;background:#ffd700;left:66%;animation-duration:20s;animation-delay:6s;"></div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- BANNER TOP -->
+  <div class="banner-top">
+    <p>🎈 ¡Convierte tu pasión por la decoración con globos en un negocio que genera ingresos desde casa! 🏡🎉</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <!-- Columna izquierda: texto -->
+      <div class="hero-text">
+        <span class="hero-badge">🎁 Clase 100% Gratuita · En Vivo</span>
+        <span class="hero-globos" aria-hidden="true">🎈 🎀 🎊 🎈 🎀</span>
+        <h1>Aprende a decorar<br/>con globos <em>desde cero</em></h1>
+        <p class="subtitulo">
+          Una clase en vivo donde aprenderás <strong>todas las técnicas</strong> para crear decoraciones increíbles y convertir tu pasión en una fuente real de ingresos.
+        </p>
+        <div class="cta-wrap" style="text-align:left;padding:0;margin-top:20px;">
+          <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
+            👉 Quiero mi lugar gratis en WhatsApp
+            <small>Inscríbete ahora — cupos limitados</small>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: video Vimeo lazy -->
+    <div class="hero-video-wrap">
+      <div style="padding:56.25% 0 0 0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.22);">
+        <iframe src="https://player.vimeo.com/video/1184453893?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;" title="video maku clase gratis"></iframe>
+      </div>
+      <script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
+
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PARA TI SI… -->
+  <section class="para-ti">
+    <div class="inner">
+      <h2>🎯 Esta clase es para ti si…</h2>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">💡</span>
+          <p>Siempre has querido decorar con globos pero <strong>no sabes por dónde empezar</strong> ni qué materiales comprar</p>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">😔</span>
+          <p>Te frustras porque tus decoraciones <strong>no quedan como las que ves en redes</strong> y no sabes qué estás haciendo mal</p>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">💰</span>
+          <p>Quieres generar <strong>ingresos extras</strong> haciendo algo que te apasiona, desde tu casa y con tu propio horario</p>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">🚀</span>
+          <p>Buscas una oportunidad real de emprender sin invertir grandes cantidades de dinero en un curso largo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ APRENDERÁS -->
+  <section class="aprenderas">
+    <div class="inner">
+      <h2>🎓 ¿Qué aprenderás en esta clase?</h2>
+      <div class="beneficios-grid">
+        <div class="beneficio-card">
+          <div class="b-icon">🛍️</div>
+          <h3>Materiales esenciales</h3>
+          <p>Exactamente qué comprar, dónde conseguirlo y cuánto invertir para empezar sin malgastar dinero</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="b-icon">🎈</div>
+          <h3>Técnicas desde cero</h3>
+          <p>Arcos, columnas, números, letras y arreglos: todas las bases que necesitas para crear diseños impactantes</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="b-icon">🎨</div>
+          <h3>Combinación de colores</h3>
+          <p>Aprende a combinar paletas y estilos para que cada decoración sea un trabajo que impresione al cliente</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="b-icon">💼</div>
+          <h3>Cómo monetizar</h3>
+          <p>Estrategias prácticas para conseguir tus primeros clientes y empezar a generar ingresos con tu talento</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="quote-box">
+      <p>
+        "En esta clase en vivo aprenderás <strong>técnicas reales, desde cero</strong>, que ya han ayudado a muchas personas apasionadas por los globos a crear decoraciones hermosas y a <strong>generar ingresos haciendo lo que aman</strong>."
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA INTERMEDIO -->
+  <div class="cta-wrap" style="padding: 10px 20px 36px;">
+    <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
+      👉 Reservar mi lugar gratis ahora
+      <small>Únete al grupo de WhatsApp</small>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MONETIZA -->
+  <section class="monetiza">
+    <div class="inner">
+      <h2>💸 Tu pasión puede ser tu negocio 🎈</h2>
+      <p>
+        La decoración con globos es uno de los negocios con <strong>mayor demanda en fiestas y eventos</strong>. Cada cumpleaños, boda, graduación o celebración empresarial es una oportunidad. Con la técnica correcta, puedes empezar a generar ingresos reales sin salir de casa.
+      </p>
+      <div class="tag-list">
+        <span class="tag">🎂 Cumpleaños</span>
+        <span class="tag">💍 Bodas</span>
+        <span class="tag">🎓 Graduaciones</span>
+        <span class="tag">👶 Baby Shower</span>
+        <span class="tag">🏢 Eventos empresariales</span>
+        <span class="tag">🎉 Cualquier celebración</span>
+      </div>
+      <div class="cta-wrap" style="padding:0;">
+        <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
+          👉 Quiero aprender y emprender
+          <small>Clase gratis · En vivo · WhatsApp</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INSTRUCTOR -->
+  <section class="instructor">
+    <div class="inner">
+      <h2>Aprende con quien ya lo vive 👩‍🎨</h2>
+      <div class="instructor-grid">
+        <div class="instructor-img-wrap">
+          <div class="avatar-placeholder">🎈</div>
+        </div>
+        <div class="instructor-bio">
+          <p>🌟 <strong>Tu instructor es un apasionado de la decoración con globos</strong> que ya convirtió esta pasión en un negocio próspero y hoy quiere compartir todo lo que aprendió contigo.</p>
+          <p>En esta clase vas a encontrar más que técnicas: vas a encontrar la <strong>hoja de ruta exacta</strong> 🗺️ para pasar de no saber nada sobre globos, a crear decoraciones que la gente paga con gusto.</p>
+          <p>✨ <strong>Sin rodeos, sin teoría innecesaria</strong> — solo lo práctico que realmente necesitas para empezar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGENCIA -->
+  <section class="urgencia">
+    <h2>⚡ ¡Los cupos son limitados!</h2>
+    <p>Esta clase en vivo es gratuita pero los cupos se llenan rápido. Asegura tu lugar ahora y empieza tu camino en la decoración con globos.</p>
+    <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa-blanco">
+      🎈 QUIERO MI LUGAR GRATIS
+      <small>Clic aquí para unirte al grupo de WhatsApp</small>
+    </a>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <h3>📢 Únete al Grupo de WhatsApp y Accede a la Clase 📲</h3>
+    <p style="margin-top:10px;">🎈 Te esperamos con globos y todo el conocimiento que necesitas para empezar 🎉</p>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+</body>
+</html>
