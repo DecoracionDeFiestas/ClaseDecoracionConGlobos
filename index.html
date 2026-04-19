@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clase Gratis de Decoración con Globos</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://fast.wistia.com/player.js" async></script>
   <style>
     :root {
       --rosa:      #d5006d;
@@ -93,15 +94,21 @@
       max-width: 980px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.6fr;
       gap: 40px;
       align-items: center;
     }
+
     @media (max-width: 700px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-text { text-align: center; }
       .hero-text .cta-wrap { text-align: center !important; }
+      .hero-cta-desktop { display: none !important; }
+      .hero-video-wrap { margin-top: 20px; order: 2; }
+      .hero-text { order: 1; }
+      .hero-cta-mobile { display: block !important; }
     }
+
     .hero-text { display: flex; flex-direction: column; }
     .hero-badge {
       display: inline-block;
@@ -142,54 +149,11 @@
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-7px); }
     }
-    /* ── VIDEO LAZY ── */
+    /* ── VIDEO WISTIA ── */
     .hero-video-wrap {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .video-lazy-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #7c3aed, #38bdf8);
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(0,0,0,.22);
     }
-    .video-lazy-container .video-thumb {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity .3s;
-    }
-    .video-lazy-container iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,.5));
-      transition: transform .2s;
-      z-index: 2;
-    }
-    .play-btn:hover { transform: translate(-50%, -50%) scale(1.1); }
-    .video-lazy-container.loaded .video-thumb,
-    .video-lazy-container.loaded .play-btn { display: none; }
 
     /* ── CTA BUTTON ── */
     .btn-wa {
@@ -500,20 +464,6 @@
       opacity: .7;
     }
 
-    /* ── GRATIS BADGE ── */
-    .gratis-badge {
-      display: inline-block;
-      background: var(--oro);
-      color: #3a2800;
-      font-size: 1rem;
-      font-weight: 800;
-      padding: 8px 24px;
-      border-radius: 999px;
-      letter-spacing: .04em;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 10px rgba(255,215,0,.4);
-    }
-
     /* ── ANIMACIONES ENTRADA ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(26px); }
@@ -567,7 +517,7 @@
         <p class="subtitulo">
           Una clase en vivo donde aprenderás <strong>todas las técnicas</strong> para crear decoraciones increíbles y convertir tu pasión en una fuente real de ingresos.
         </p>
-        <div class="cta-wrap" style="text-align:left;padding:0;margin-top:20px;">
+        <div class="cta-wrap hero-cta-desktop" style="text-align:left;padding:0;margin-top:20px;">
           <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
             👉 Quiero mi lugar gratis en WhatsApp
             <small>Inscríbete ahora — cupos limitados</small>
@@ -575,14 +525,20 @@
         </div>
       </div>
 
-      <!-- Columna derecha: video Vimeo lazy -->
-    <div class="hero-video-wrap">
-      <div style="padding:56.25% 0 0 0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.22);background:#000;">
-        <iframe src="https://player.vimeo.com/video/1184453893" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;" title="video maku clase gratis" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <!-- Columna derecha: video Wistia -->
+      <div class="hero-video-wrap">
+        <script src="https://fast.wistia.com/embed/kc59mf24xz.js" async type="module"></script>
+        <style>wistia-player[media-id='kc59mf24xz']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/kc59mf24xz/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
+        <wistia-player media-id="kc59mf24xz" aspect="1.7777777777777777"></wistia-player>
+        <!-- Botón que aparece solo en móvil, debajo del video -->
+        <div class="cta-wrap hero-cta-mobile" style="text-align:center;padding:16px 0 0 0;display:none;margin-top:16px;">
+          <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
+            👉 Quiero mi lugar gratis en WhatsApp
+            <small>Inscríbete ahora — cupos limitados</small>
+          </a>
+        </div>
       </div>
     </div>
-
-
   </section>
 
   <div class="divider"></div>
