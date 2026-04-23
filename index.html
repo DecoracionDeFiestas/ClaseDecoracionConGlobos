@@ -148,7 +148,6 @@
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-7px); }
     }
-    /* ── VIDEO WISTIA ── */
     .hero-video-wrap {
       position: relative;
       width: 100%;
@@ -180,48 +179,6 @@
       text-transform: uppercase;
     }
     .cta-wrap { text-align: center; padding: 8px 20px; }
-
-    /* ── DOLOR — "Esto es para ti si…" ── */
-    .para-ti {
-      background: var(--gris-cl);
-      padding: 50px 20px;
-    }
-    .para-ti .inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .para-ti h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    .check-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-    .check-item {
-      background: var(--blanco);
-      border-radius: 14px;
-      padding: 20px 22px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      box-shadow: 0 2px 12px rgba(0,0,0,.07);
-      border-left: 5px solid var(--rosa);
-    }
-    .check-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .check-item p {
-      font-size: 1rem;
-      line-height: 1.55;
-      color: #333;
-    }
-    .check-item p strong { color: var(--rosa); }
 
     /* ── QUÉ APRENDERÁS ── */
     .aprenderas {
@@ -360,10 +317,12 @@
       text-align: center;
     }
     .instructor-img-wrap img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 16px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
       box-shadow: 0 6px 28px rgba(0,0,0,.14);
+      border: 4px solid var(--rosa);
     }
     .instructor-bio p {
       font-size: 1.05rem;
@@ -480,6 +439,31 @@
     @media (max-width: 400px) {
       .beneficios-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── GALERÍA ── */
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .galeria-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+      transition: transform .2s;
+    }
+    .galeria-grid img:hover { transform: scale(1.03); }
+    @media (max-width: 600px) {
+      .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+      .galeria-grid img { height: 140px; }
+    }
+    @media (max-width: 380px) {
+      .galeria-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -512,27 +496,26 @@
       <div class="hero-text">
         <span class="hero-badge">🎁 Clase 100% Gratuita · En Vivo</span>
         <span class="hero-globos" aria-hidden="true">🎈 🎀 🎊 🎈 🎀</span>
-        <h1>Aprende a decorar<br/>con globos <em>desde cero</em></h1>
+        <h1>Aprende a decorar<br/>con globos <em>paso a paso</em></h1>
         <p class="subtitulo">
           Una clase en vivo donde aprenderás <strong>todas las técnicas</strong> para crear decoraciones increíbles y convertir tu pasión en una fuente real de ingresos.
         </p>
         <div class="cta-wrap hero-cta-desktop" style="text-align:left;padding:0;margin-top:20px;">
-          <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
-            👉 Quiero mi lugar gratis en WhatsApp
+          <a href="https://chat.whatsapp.com/DWgt1QwFlFd2pVyLQMtZrb" class="btn-wa">
+            👉 Quiero acceder a la clase
             <small>Inscríbete ahora — cupos limitados</small>
           </a>
         </div>
       </div>
 
-      <!-- Columna derecha: video Wistia -->
       <div class="hero-video-wrap">
         <video controls width="100%" style="border-radius:12px;display:block;">
           <source src="./Tu-Videos.mp4" type="video/mp4">
         </video>
         <!-- Botón que aparece solo en móvil, debajo del video -->
         <div class="cta-wrap hero-cta-mobile" style="text-align:center;padding:16px 0 0 0;display:none;margin-top:16px;">
-          <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
-            👉 Quiero mi lugar gratis en WhatsApp
+          <a href="https://chat.whatsapp.com/DWgt1QwFlFd2pVyLQMtZrb" class="btn-wa">
+            👉 Quiero acceder a la clase
             <small>Inscríbete ahora — cupos limitados</small>
           </a>
         </div>
@@ -542,73 +525,45 @@
 
   <div class="divider"></div>
 
-  <!-- PARA TI SI… -->
+  <!-- GALERÍA DE TRABAJOS -->
   <section class="para-ti">
     <div class="inner">
-      <h2>🎯 Esta clase es para ti si…</h2>
-      <div class="check-list">
-        <div class="check-item">
-          <span class="check-icon">💡</span>
-          <p>Siempre has querido decorar con globos pero <strong>no sabes por dónde empezar</strong> ni qué materiales comprar</p>
-        </div>
-        <div class="check-item">
-          <span class="check-icon">😔</span>
-          <p>Te frustras porque tus decoraciones <strong>no quedan como las que ves en redes</strong> y no sabes qué estás haciendo mal</p>
-        </div>
-        <div class="check-item">
-          <span class="check-icon">💰</span>
-          <p>Quieres generar <strong>ingresos extras</strong> haciendo algo que te apasiona, desde tu casa y con tu propio horario</p>
-        </div>
-        <div class="check-item">
-          <span class="check-icon">🚀</span>
-          <p>Buscas una oportunidad real de emprender sin invertir grandes cantidades de dinero en un curso largo</p>
-        </div>
-      </div>
+      <h2>🎈 Mira lo que podrás crear</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <img src="./img/test1.png" alt="Decoración 1">
+        <img src="./img/test2.png" alt="Decoración 2">
+        <img src="./img/test3.png" alt="Decoración 3">
+        <img src="./img/test4.png" alt="Decoración 4">
+        <img src="./img/test5.png" alt="Decoración 5">
+        <img src="./img/test6.png" alt="Decoración 6">
+        <img src="./img/test7.png" alt="Decoración 7">
+        <img src="./img/test8.png" alt="Decoración 8">
     </div>
   </section>
 
-  <!-- QUÉ APRENDERÁS -->
-  <section class="aprenderas">
-    <div class="inner">
-      <h2>🎓 ¿Qué aprenderás en esta clase?</h2>
-      <div class="beneficios-grid">
-        <div class="beneficio-card">
-          <div class="b-icon">🛍️</div>
-          <h3>Materiales esenciales</h3>
-          <p>Exactamente qué comprar, dónde conseguirlo y cuánto invertir para empezar sin malgastar dinero</p>
-        </div>
-        <div class="beneficio-card">
-          <div class="b-icon">🎈</div>
-          <h3>Técnicas desde cero</h3>
-          <p>Arcos, columnas, números, letras y arreglos: todas las bases que necesitas para crear diseños impactantes</p>
-        </div>
-        <div class="beneficio-card">
-          <div class="b-icon">🎨</div>
-          <h3>Combinación de colores</h3>
-          <p>Aprende a combinar paletas y estilos para que cada decoración sea un trabajo que impresione al cliente</p>
-        </div>
-        <div class="beneficio-card">
-          <div class="b-icon">💼</div>
-          <h3>Cómo monetizar</h3>
-          <p>Estrategias prácticas para conseguir tus primeros clientes y empezar a generar ingresos con tu talento</p>
-        </div>
-      </div>
-    </div>
+  <!-- MIRA LO QUE APRENDERÁS -->
+  <section style="background:var(--azul-cl);padding:30px 0;">
+    <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4.5vw,2.6rem);padding:0 20px 20px;">MIRA TODO LO QUE TE PUEDO ENSEÑAR PASO A PASO 👇👇👇👇</h2>
+    <img src="./img/img1.jpeg" alt="1" style="width:90%;max-width:800px;display:block;margin:0 auto;">
+    <img src="./img/img2.jpeg" alt="2" style="width:90%;max-width:800px;display:block;margin:0 auto;">
+    <img src="./img/img3.jpeg" alt="3" style="width:90%;max-width:800px;display:block;margin:0 auto;">
+    <img src="./img/img4.jpeg" alt="4" style="width:90%;max-width:800px;display:block;margin:0 auto;">
+    <img src="./img/img5.jpeg" alt="5" style="width:90%;max-width:800px;display:block;margin:0 auto;">
   </section>
 
   <!-- QUOTE -->
   <section class="quote-section">
     <div class="quote-box">
       <p>
-        "En esta clase en vivo aprenderás <strong>técnicas reales, desde cero</strong>, que ya han ayudado a muchas personas apasionadas por los globos a crear decoraciones hermosas y a <strong>generar ingresos haciendo lo que aman</strong>."
+        "En esta clase en vivo aprenderás <strong>técnicas reales, desde cero</strong>, que ya han ayudado a muchas personas apasionadas por los globos a crear decoraciones hermosas y <strong>a generar ingresos haciendo lo que aman</strong>."
       </p>
     </div>
   </section>
 
   <!-- CTA INTERMEDIO -->
   <div class="cta-wrap" style="padding: 10px 20px 36px;">
-    <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
-      👉 Reservar mi lugar gratis ahora
+    <a href="https://chat.whatsapp.com/DWgt1QwFlFd2pVyLQMtZrb" class="btn-wa">
+      👉 Quiero acceder a la clase
       <small>Únete al grupo de WhatsApp</small>
     </a>
   </div>
@@ -620,7 +575,7 @@
     <div class="inner">
       <h2>💸 Tu pasión puede ser tu negocio 🎈</h2>
       <p>
-        La decoración con globos es uno de los negocios con <strong>mayor demanda en fiestas y eventos</strong>. Cada cumpleaños, boda, graduación o celebración empresarial es una oportunidad. Con la técnica correcta, puedes empezar a generar ingresos reales sin salir de casa.
+        La decoración con globos es uno de los negocios con <strong>mayor demanda en fiestas y eventos</strong>. Cada cumpleaños, boda, graduación o celebración empresarial es una oportunidad. Con la técnica correcta, puedes empezar a generar ingresos reales hasta desde casa
       </p>
       <div class="tag-list">
         <span class="tag">🎂 Cumpleaños</span>
@@ -631,8 +586,8 @@
         <span class="tag">🎉 Cualquier celebración</span>
       </div>
       <div class="cta-wrap" style="padding:0;">
-        <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa">
-          👉 Quiero aprender y emprender
+        <a href="https://chat.whatsapp.com/DWgt1QwFlFd2pVyLQMtZrb" class="btn-wa">
+          👉 Quiero acceder a la clase
           <small>Clase gratis · En vivo · WhatsApp</small>
         </a>
       </div>
@@ -644,14 +599,14 @@
   <!-- INSTRUCTOR -->
   <section class="instructor">
     <div class="inner">
-      <h2>Aprende con quien ya lo vive 👩‍🎨</h2>
+      <h2>Tu Mentora que te guiara hacia el Éxito en la Decoración con Globos</h2>
       <div class="instructor-grid">
         <div class="instructor-img-wrap">
-          <div class="avatar-placeholder">🎈</div>
+          <img src="./img/experta.jpg" alt="Maribel Lazarte Gómez">
         </div>
         <div class="instructor-bio">
-          <p>🌟 <strong>Tu instructor es un apasionado de la decoración con globos</strong> que ya convirtió esta pasión en un negocio próspero y hoy quiere compartir todo lo que aprendió contigo.</p>
-          <p>En esta clase vas a encontrar más que técnicas: vas a encontrar la <strong>hoja de ruta exacta</strong> 🗺️ para pasar de no saber nada sobre globos, a crear decoraciones que la gente paga con gusto.</p>
+          <p>🌟 <strong>Maribel Lazarte Gómez</strong> Fundadora del Taller de MAKU Escuela de Eventos Y Fiestas Infantiles</p>
+          <p>En esta clase vas a encontrar más que técnicas: vas a encontrar la <strong>ruta exacta</strong> 🗺️ para pasar de no saber nada sobre globos, a crear decoraciones que la gente paga con gusto.</p>
           <p>✨ <strong>Sin rodeos, sin teoría innecesaria</strong> — solo lo práctico que realmente necesitas para empezar.</p>
         </div>
       </div>
@@ -662,8 +617,8 @@
   <section class="urgencia">
     <h2>⚡ ¡Los cupos son limitados!</h2>
     <p>Esta clase en vivo es gratuita pero los cupos se llenan rápido. Asegura tu lugar ahora y empieza tu camino en la decoración con globos.</p>
-    <a href="https://chat.whatsapp.com/ILnKiL9LCPa4Z0BAw7WQ0y?mode=gi_t" class="btn-wa-blanco">
-      🎈 QUIERO MI LUGAR GRATIS
+    <a href="https://chat.whatsapp.com/DWgt1QwFlFd2pVyLQMtZrb" class="btn-wa-blanco">
+      🎈 Quiero acceder a la clase
       <small>Clic aquí para unirte al grupo de WhatsApp</small>
     </a>
   </section>
@@ -675,6 +630,15 @@
     <h3>📢 Únete al Grupo de WhatsApp y Accede a la Clase 📲</h3>
     <p style="margin-top:10px;">🎈 Te esperamos con globos y todo el conocimiento que necesitas para empezar 🎉</p>
   </footer>
+
+  <div class="divider"></div>
+  
+  <!-- DISCLAIMER -->
+  <div style="background: var(--azul-cl);padding:20px;text-align:center;">
+    <p style="color:#000000;font-size:0.75rem;max-width:700px;margin:0 auto;line-height:1.6;">
+      DESCARGOS DE RESPONSABILIDAD IMPORTANTES: Este sitio no es parte del sitio web de Facebook o Facebook Inc. Además, este sitio no está respaldado por Facebook de ninguna manera. FACEBOOK es una marca registrada de FACEBOOK, Inc.
+    </p>
+  </div>
 
 </div><!-- /page-wrap -->
 
